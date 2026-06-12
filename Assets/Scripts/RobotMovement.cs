@@ -3,22 +3,31 @@ using UnityEngine;
 public class RobotMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float speed = 0.5f; // Units per second
+    public float speed = 0.2f; // Units per second
 
     private bool moveForward = false;
     private bool moveBackward = false;
 
     [Header("Rotation Settings")]
-    public float rotationStep = 15f; // Degrees per button press
+    public float rotationStep = 5f; // Degrees per button press
 
     private Matrix4x4 initialMatrix;
-    private void Start()
-    {
-        initialMatrix = transform.worldToLocalMatrix;
-    }
+	private Vector3 initialPos;
+    private Quaternion initialRot;
+    private Vector3 initialScale;
+    private bool firstTime = false;
+	
 
     void Update()
     {
+		if (!firstTime)
+        {
+            initialPos = transform.position;
+            initialRot = transform.rotation;
+            initialScale = transform.localScale;
+            firstTime = true;
+        }
+		
         Vector3 direction = Vector3.zero;
 
         if (moveForward)
@@ -63,6 +72,18 @@ public class RobotMovement : MonoBehaviour
     // --- Reset Transformations ---
     public void ResetTransformations()
     {
+        // Apply back to transform
+        transform.position = initialPos;
+        transform.rotation = initialRot;
+        transform.localScale = initialScale;
+        firstTime = false;
+
+    }
+	
+/*
+    // --- Reset Transformations ---
+    public void ResetTransformations()
+    {
         if (initialMatrix != Matrix4x4.zero)
         {
             // Extract position
@@ -87,4 +108,5 @@ public class RobotMovement : MonoBehaviour
             transform.localScale = scale;
         }
     }
+	*/
 }

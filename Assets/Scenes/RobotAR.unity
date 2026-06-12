@@ -1677,8 +1677,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3dbd26fc04e6149bfee8a94b38f5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobotMovement
-  speed: 0.5
-  rotationStep: 15
+  speed: 0.1
+  rotationStep: 5
 --- !u!95 &948412458
 Animator:
   serializedVersion: 7
